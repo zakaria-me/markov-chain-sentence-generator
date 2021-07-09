@@ -32,10 +32,18 @@ public class Main {
     ArrayList<String> copyOfArray = new ArrayList<String>(array);
     while (copyOfArray.contains(randomWord)) {
       int closestIndex = copyOfArray.indexOf(randomWord);
-      if (copyOfArray.get(closestIndex + 1) != null && closestIndex != -1) {
+      if (copyOfArray.get(closestIndex + 1) != null && closestIndex != -1 && copyOfArray.get(closestIndex + 1) != "\n"
+          && !bigrams.contains(copyOfArray.get(closestIndex + 1))) {
         bigrams.add(copyOfArray.get(closestIndex + 1));
-        copyOfArray.remove(closestIndex);
       }
+      copyOfArray.remove(closestIndex);
+    }
+  }
+
+  public static void display(String randomWord, ArrayList<String> bigrams) {
+    System.out.println(randomWord);
+    for (int index = 0; index < bigrams.size(); index++) {
+      System.out.print(index + " " + bigrams.get(index) + " ");
     }
   }
 }
