@@ -19,27 +19,40 @@ public class Main {
   }
 
   public static void main(String[] args) {
+    // Initialization
     String filePath = "source-text.txt";
     String sourceText = readFile(filePath);
     // make sourceText into a list
     String[] arrayOfSourceText = sourceText.split(" ");
     List<String> array = Arrays.asList(arrayOfSourceText);
-    int randomIndex = (int) ((Math.random() * 10000.0) % array.size());
-    String randomWord = array.get(randomIndex);
-    // find bigrams matching the randomWord
-    ArrayList<String> bigrams = new ArrayList<String>();
-    ArrayList<String> copyOfArray = new ArrayList<String>(array);
-    while (copyOfArray.contains(randomWord)) {
-      int closestIndex = copyOfArray.indexOf(randomWord);
-      if (copyOfArray.get(closestIndex + 1) != null && closestIndex != -1 && copyOfArray.get(closestIndex + 1) != "\n"
-          && !bigrams.contains(copyOfArray.get(closestIndex + 1))) {
-        bigrams.add(copyOfArray.get(closestIndex + 1));
+    String sentenceGenerated = "";
+
+    // The algorithm
+    int randomIndex = 0;
+    for (int loop = 0; loop < 11; loop++) {
+      // chose a random word, the index is always between 0 and array.size()
+      randomIndex = (int) ((Math.random() * 10000.0) % array.size());
+      String randomWord = array.get(randomIndex);
+      // add the word to the sentence
+      sentenceGenerated += " " + randomWord;
+      // find bigrams matching the randomWord
+      ArrayList<String> bigrams = new ArrayList<String>();
+      ArrayList<String> copyOfArray = new ArrayList<String>(array);
+      while (copyOfArray.contains(randomWord)) {
+        int closestIndex = copyOfArray.indexOf(randomWord);
+        if (copyOfArray.get(closestIndex + 1) != null && closestIndex != -1 && copyOfArray.get(closestIndex + 1) != "\n"
+            && !bigrams.contains(copyOfArray.get(closestIndex + 1))) {
+          bigrams.add(copyOfArray.get(closestIndex + 1));
+        }
+        copyOfArray.remove(closestIndex);
       }
-      copyOfArray.remove(closestIndex);
+      randomIndex = (int) ((Math.random() * 10000.0) % bigrams.size());
+      sentenceGenerated += " " + bigrams.get(randomIndex);
     }
+    System.out.println(sentenceGenerated);
   }
 
-  public static void display(String randomWord, ArrayList<String> bigrams) {
+  public static void displayRandomWordAndBigramsAssociated(String randomWord, ArrayList<String> bigrams) {
     System.out.println(randomWord);
     for (int index = 0; index < bigrams.size(); index++) {
       System.out.print(index + " " + bigrams.get(index) + " ");
