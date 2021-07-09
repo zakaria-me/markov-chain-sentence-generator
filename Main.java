@@ -24,8 +24,7 @@ public class Main {
     // make sourceText into a list
     String[] arrayOfSourceText = sourceText.split(" ");
     List<String> array = Arrays.asList(arrayOfSourceText);
-    // chose a random word
-    int randomIndex = (int) (Math.random() * 100.0);
+    int randomIndex = (int) ((Math.random() * 10000.0) % array.size());
     String randomWord = array.get(randomIndex);
     // find bigrams matching the randomWord
     ArrayList<String> bigrams = new ArrayList<String>();
