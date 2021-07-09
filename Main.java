@@ -18,5 +18,10 @@ public class Main {
   public static void main(String[] args) {
     String filePath = "source-text.txt";
     String sourceText = readFile(filePath);
+    // make sourceText into an array
+    String[] arrayOfSourceText = sourceText.split(" ");
+    // chose a random word
+    int randomIndex = (int) (Math.random() * 100.0);
+    String randomWord = arrayOfSourceText[randomIndex];
   }
 }
