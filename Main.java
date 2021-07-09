@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
@@ -18,10 +21,21 @@ public class Main {
   public static void main(String[] args) {
     String filePath = "source-text.txt";
     String sourceText = readFile(filePath);
-    // make sourceText into an array
+    // make sourceText into a list
     String[] arrayOfSourceText = sourceText.split(" ");
+    List<String> array = Arrays.asList(arrayOfSourceText);
     // chose a random word
     int randomIndex = (int) (Math.random() * 100.0);
-    String randomWord = arrayOfSourceText[randomIndex];
+    String randomWord = array.get(randomIndex);
+    // find bigrams matching the randomWord
+    ArrayList<String> bigrams = new ArrayList<String>();
+    ArrayList<String> copyOfArray = new ArrayList<String>(array);
+    while (copyOfArray.contains(randomWord)) {
+      int closestIndex = copyOfArray.indexOf(randomWord);
+      if (copyOfArray.get(closestIndex + 1) != null && closestIndex != -1) {
+        bigrams.add(copyOfArray.get(closestIndex + 1));
+        copyOfArray.remove(closestIndex);
+      }
+    }
   }
 }
