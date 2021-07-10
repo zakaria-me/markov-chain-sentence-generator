@@ -27,9 +27,11 @@ public class Main {
     List<String> array = Arrays.asList(arrayOfSourceText);
     String sentenceGenerated = "";
 
+    // chose a random length for the sentence.
+    int randomLength = (int) (Math.random() * 10.0);
     // The algorithm
     int randomIndex = 0;
-    for (int loop = 0; loop < 11; loop++) {
+    for (int loop = 0; loop < randomLength; loop++) {
       // chose a random word, the index is always between 0 and array.size()
       randomIndex = (int) ((Math.random() * 10000.0) % array.size());
       String randomWord = array.get(randomIndex);
