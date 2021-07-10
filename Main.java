@@ -20,7 +20,7 @@ public class Main {
 
   public static void main(String[] args) {
     // Initialization
-    String filePath = "source-text.txt";
+    String filePath = "source-text.txt"; // change the string to the path of your source text
     String sourceText = readFile(filePath);
     // make sourceText into a list
     String[] arrayOfSourceText = sourceText.split(" ");
